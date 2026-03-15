@@ -3,10 +3,10 @@ FROM ghcr.io/astral-sh/uv:python3.14-bookworm-slim AS dev
 LABEL maintainer="TODO <todo@todo.todo>"
 LABEL description="A special template"
 
-WORKDIR /app
-
-ENV UV_LINK_MODE=copy
 ENV DEBIAN_FRONTEND=noninteractive
+ENV UV_LINK_MODE=copy
+
+WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
@@ -15,16 +15,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd --system --gid 1000 vscode \
- && useradd --system --gid 1000 --uid 1000 --create-home vscode
-
-COPY --chown=vscode:vscode pyproject.toml ./
-
-RUN --mount=type=cache,target=/home/vscode/.cache/uv \
-    uv sync --no-install-project
-
-COPY --chown=vscode:vscode . .
+RUN groupadd -g 1000 vscode \
+ && useradd -m -u 1000 -g 1000 -s /bin/bash vscode
 
 USER vscode
 
-RUN echo 'source /app/.venv/bin/activate' >> /home/vscode/.bashrc
+RUN echo 'source /app/.venv/bin/activate 2>/dev/null || true' >> ~/.bashrc
