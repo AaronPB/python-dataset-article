@@ -18,10 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN groupadd --system --gid 1000 vscode \
  && useradd --system --gid 1000 --uid 1000 --create-home vscode
 
-COPY --chown=vscode:vscode pyproject.toml uv.lock* ./
+COPY --chown=vscode:vscode pyproject.toml ./
 
 RUN --mount=type=cache,target=/home/vscode/.cache/uv \
-    uv sync --locked --no-install-project
+    uv sync --no-install-project
 
 COPY --chown=vscode:vscode . .
 
