@@ -6,16 +6,14 @@
     "target": "dev"
   },
   "remoteUser": "vscode",
-  "mounts": [
-    "source=${localWorkspaceFolder},target=/app,type=bind"
-  ],
   "runArgs": [
       "--name", "vsc-python-dataset-article"
     ],
   "customizations": {
     "vscode": {
       "settings": {
-        "python.defaultInterpreterPath": "/app/.venv/bin/python",
+        "remote.autoForwardPorts": false,
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
         "python.analysis.autoImportCompletions": true,
         "python.testing.pytestEnabled": true,
         "python.testing.unittestEnabled": false,
@@ -36,6 +34,5 @@
     }
   }
   },
-  "postCreateCommand": "uv sync",
-  "updateRemoteUserUID": true
+  "postCreateCommand": "uv sync"
 }
