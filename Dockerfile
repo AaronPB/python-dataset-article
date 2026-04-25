@@ -4,9 +4,8 @@ LABEL maintainer="TODO <todo@todo.todo>"
 LABEL description="A special template"
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV UV_LINK_MODE=copy
 
-WORKDIR /app
+WORKDIR /workspaces
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
@@ -15,9 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-RUN groupadd -g 1000 vscode \
- && useradd -m -u 1000 -g 1000 -s /bin/bash vscode
+RUN useradd -ms /bin/bash vscode
 
 USER vscode
 
-RUN echo 'source /app/.venv/bin/activate 2>/dev/null || true' >> ~/.bashrc
+RUN echo 'if [ -f .venv/bin/activate ]; then source .venv/bin/activate; fi' >> ~/.bashrc
