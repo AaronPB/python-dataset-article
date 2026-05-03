@@ -6,7 +6,6 @@
     "target": "dev"
   },
   "remoteUser": "vscode",
-  "updateRemoteUserUID": true,
   "runArgs": [
       "--name", "vsc-python-dataset-article"
     ],
