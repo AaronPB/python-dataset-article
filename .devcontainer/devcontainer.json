@@ -6,6 +6,7 @@
     "target": "dev"
   },
   "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
   "runArgs": [
       "--name", "vsc-python-dataset-article"
     ],
@@ -22,6 +23,7 @@
             "bash": {
                 "path": "/bin/bash"
             }
+          }
       },
       "extensions": [
         "ms-python.python",
@@ -31,8 +33,8 @@
         "charliermarsh.ruff",
         "esbenp.prettier-vscode"
       ]
-    }
   }
   },
-  "postCreateCommand": "uv sync"
+  "postCreateCommand": "uv sync",
+  "updateRemoteUserUID": true
 }
